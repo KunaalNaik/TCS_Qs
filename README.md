@@ -130,3 +130,134 @@ This documentation explains the changes made to the parallel programming archite
 - **Skill/Practical Focus**: These questions assess the candidate’s ability to handle real-world parallel programming challenges in distributed systems, optimize performance, and document the changes for future scalability.
 
 This scenario ensures a comprehensive evaluation of the candidate's **D3 level Skill/Practical (ScB)** knowledge for **PC4** in **N8121**, focusing on advanced parallel programming, task synchronization, and system optimization tasks in a high-performance environment.
+
+
+Scenario for N8122 - PC5: Integration of Core Algorithmic Models and Parallel Programming Constraints
+Scenario:
+You are responsible for integrating core algorithmic models into an autonomous system, ensuring that the code is reusable and scalable. The system handles multiple data streams simultaneously, and the existing codebase is not optimized for parallel processing or future scalability. Your tasks include designing and implementing a solution to integrate the algorithmic models, ensuring that the system can handle increasing data loads, while maintaining reusable and modular code. You must also incorporate parallel programming constraints, making sure that task synchronization and resource management are handled efficiently.
+
+Questions for the Scenario
+Question 1: Core Model Integration
+Question Type: Scenario-based (ScB)
+Question:
+Write a Python function that integrates two core algorithmic models into the autonomous system. Ensure that the models can work together in parallel without interfering with each other’s resource usage. The function should optimize CPU and memory usage and allow for future scalability.
+
+Answer:
+
+python
+Copy code
+from multiprocessing import Pool
+
+def core_model_1(data):
+    # Simulate processing for model 1
+    return data ** 2
+
+def core_model_2(data):
+    # Simulate processing for model 2
+    return data ** 3
+
+def integrate_core_models(data_list):
+    with Pool() as pool:
+        model_1_results = pool.map(core_model_1, data_list)
+        model_2_results = pool.map(core_model_2, data_list)
+    return model_1_results, model_2_results
+
+# Example usage
+data = [1, 2, 3, 4]
+results = integrate_core_models(data)
+Explanation:
+The function integrates two core algorithmic models and uses Python’s multiprocessing library to run them in parallel. This ensures optimal CPU usage by distributing the workload across available cores and allows for future scalability by making the function modular and reusable.
+
+Question 2: Reusability and Modularity
+Question Type: Scenario-based (ScB)
+Question:
+Refactor the following Python code to improve its reusability and modularity. Ensure that the system can scale in the future and that the code can easily integrate additional models.
+
+python
+Copy code
+def process_model_1(data):
+    return data * 2
+
+def process_model_2(data):
+    return data + 5
+Answer:
+
+python
+Copy code
+def process_model(data, model):
+    # Process data using the provided model function
+    return model(data)
+
+def model_1(data):
+    return data * 2
+
+def model_2(data):
+    return data + 5
+
+# Example usage
+data = [1, 2, 3]
+result_1 = [process_model(d, model_1) for d in data]
+result_2 = [process_model(d, model_2) for d in data]
+Explanation:
+The code is refactored to improve reusability by introducing a process_model function that takes any model as a parameter. This makes the code more modular and scalable, allowing additional models to be easily integrated into the system.
+
+Question 3: Parallel Programming Constraints
+Question Type: Scenario-based (ScB)
+Question:
+The system faces bottlenecks due to parallel processing constraints, especially during task synchronization. Write a Python function that optimizes task synchronization using the threading library, ensuring minimal resource contention while maximizing throughput.
+
+Answer:
+
+python
+Copy code
+import threading
+
+def task(lock, data):
+    with lock:
+        # Simulate a task that requires synchronization
+        result = data * 2
+        return result
+
+def optimize_synchronization(data_list):
+    lock = threading.Lock()
+    threads = []
+    results = []
+    
+    for data in data_list:
+        thread = threading.Thread(target=task, args=(lock, data))
+        threads.append(thread)
+        thread.start()
+    
+    for thread in threads:
+        thread.join()
+
+    return "Task synchronization optimized"
+
+# Example usage
+data = [1, 2, 3, 4]
+optimize_synchronization(data)
+Explanation:
+The function uses Python’s threading library to handle task synchronization with a lock mechanism. This ensures that shared resources are accessed in a controlled manner, minimizing resource contention while maximizing throughput.
+
+Question 4: Documentation Update for Integration and Scalability
+Question Type: Scenario-based (ScB)
+Question:
+Update the system documentation to include the newly implemented integration of core algorithmic models and parallel programming optimizations. The documentation should explain how these changes improve the system's scalability and resource management.
+
+Answer:
+
+text
+Copy code
+### Integration of Core Algorithmic Models and Parallel Programming Optimization
+
+To enhance the performance and scalability of the autonomous system, several key changes have been made:
+
+1. **Core Model Integration**:
+   Two core algorithmic models were integrated into the system using Python’s `multiprocessing` library. This allows the models to run in parallel, optimizing CPU and memory usage while maintaining system performance. The function is modular, enabling future models to be added with minimal changes to the existing codebase.
+
+2. **Parallel Programming Optimization**:
+   Task synchronization was optimized using the `threading` library, minimizing resource contention during parallel processing. By implementing a lock mechanism, multiple tasks can now run concurrently without interfering with each other’s resource usage. This significantly improves the system’s throughput and allows it to handle increasing data loads efficiently.
+
+These changes ensure that the system is both scalable and resource-efficient, capable of handling complex algorithmic tasks with high performance.
+Explanation:
+The documentation provides a clear and detailed explanation of the changes made to the system, focusing on the integration of core models and the parallel programming optimizations that enhance system scalability and performance.
